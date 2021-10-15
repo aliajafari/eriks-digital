@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.scss";
 
-function App() {
-  return <div className="App">React Project with Webpack</div>;
-}
+const App = () => {
+  return <div>React </div>;
+};
 
 export default App;
