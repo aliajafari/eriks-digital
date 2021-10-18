@@ -1,0 +1,34 @@
+@import '../../styles/partials/variables';
+
+.compare {
+    &__title {
+        border-bottom: 1px solid darken($grey-color, 10%);
+
+        h1 {
+            color: $corporate-color;
+            font-weight: 900;
+        }
+    }
+
+    &__aside {
+        padding: 20px;
+        border-right: 2px solid darken($grey-color, 10%);
+    }
+
+    &__content {
+        padding: 20px 0;
+    }
+}
+
+.selectedProductsList {
+    list-style-image: url('../../styles/images/icons/checked.png');
+    list-style-position: inside;
+    padding: 0;
+    margin: 0;
+    font-weight: 700;
+    font-size: 14px;
+
+    li {
+        margin-bottom: 10px;
+    }
+}

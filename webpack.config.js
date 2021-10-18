@@ -33,10 +33,10 @@ module.exports = {
                     "sass-loader",
                 ],
             },
-            {
-                test: /\.(png|jp(e*)g|svg|gif)$/,
-                use: ['file-loader'],
-            },
+            // {
+            //     test: /\.(png|jp(e*)g|svg|gif)$/,
+            //     use: ['file-loader'],
+            // },
             {
                 test: /\.svg$/,
                 use: ['@svgr/webpack'],
@@ -47,7 +47,6 @@ module.exports = {
                 exclude: /(node_modules)/,
                 options: {
                     presets: ['@babel/react'],
-                    plugins: [['import', { libraryName: 'antd', style: true }]],
                 },
             },
             {

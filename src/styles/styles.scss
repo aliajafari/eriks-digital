@@ -1,0 +1,22 @@
+// @import "partials/normalize";
+@import "partials/variables";
+@import "partials/grid";
+
+body {
+    color: $text-color;
+    font-family: $default-font;
+    background: white;
+    line-height: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: $corporate-color;
+}
+
+.container-fluid {
+    width: 1240px
+}

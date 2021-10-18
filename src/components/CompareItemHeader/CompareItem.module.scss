@@ -1,0 +1,29 @@
+@import "../../styles/partials/variables.scss";
+
+.compareItemHeader {
+    >div {
+        border-bottom: 1px solid darken($grey-color, 10%);
+        padding: 30px 15px;
+    }
+}
+
+.productImage {
+    display: block;
+    width: 100%;
+    margin: auto;
+}
+
+.title {
+    font-size: 14px;
+    min-height: 90px;
+}
+
+.price {
+    font-weight: 900;
+}
+
+.subPrice {
+    font-size: 12px;
+    color: darken($grey-color, 30%);
+}
+
