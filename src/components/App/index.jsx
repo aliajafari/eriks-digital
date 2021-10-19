@@ -50,15 +50,14 @@ const App = () => {
   }, []);
 
   const transformKeys = (products, showProducts) => {
-    const productItem = products[0];
-
-    const newNewProducts = products.filter((item) =>
+    const allProducts = products.filter((item) =>
       showProducts.includes(item.sku)
     );
+    const productItem = allProducts[0];
 
     let keys = Object.keys(productItem)
       .filter((item) => !areNotFeature.includes(item))
-      .sort(function (a, b) {
+      .sort((a, b) => {
         return a.toLowerCase().localeCompare(b.toLowerCase());
       });
     keys.unshift("badges");
@@ -67,7 +66,7 @@ const App = () => {
     const keysWithDiff = keys.map((key) => {
       return {
         key,
-        hasDiff: !newNewProducts.every((x) => x[key] === productItem[key]),
+        hasDiff: !allProducts.every((x) => x[key] === productItem[key]),
       };
     });
     setKeys(keysWithDiff);
@@ -91,7 +90,7 @@ const App = () => {
     const newProducts = [...products].filter((item) => item.sku !== sku);
     setShowProducts([...showProducts].filter((item) => item !== sku));
     setProducts(newProducts);
-    transformKeys(newProducts);
+    transformKeys(newProducts, showProducts);
   };
 
   return (
