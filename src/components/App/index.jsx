@@ -93,7 +93,9 @@ const App = () => {
     transformKeys(newProducts, showProducts);
   };
 
-  return (
+  return loading ? (
+    <div>loading...</div>
+  ) : (
     <Fragment>
       <div className="container-fluid">
         <div className={`row ${styles.compare__title}`}>
