@@ -38,10 +38,10 @@ const App = () => {
     setLoading(true);
     getProducts()
       .then((res) => {
+        const showProductsArray = res.data.products.map((item) => item.sku);
         setProducts(res.data.products);
-        setShowProducts(res.data.products.map((item) => item.sku));
-        // setShowProducts(["115E19", "11545A", "115E1A"]);
-        transformKeys(res.data.products);
+        transformKeys(res.data.products, showProductsArray);
+        setShowProducts(showProductsArray);
         setLoading(false);
       })
       .catch((err) => {
@@ -49,8 +49,16 @@ const App = () => {
       });
   }, []);
 
-  const transformKeys = (products) => {
-    let keys = Object.keys(products[0])
+  const transformKeys = (products, showProducts) => {
+    const productItem = products[0];
+
+    const newNewProducts = products.filter((item) =>
+      showProducts.includes(item.sku)
+    );
+
+    console.log("newNewProducts", newNewProducts);
+
+    let keys = Object.keys(productItem)
       .filter((item) => !areNotFeature.includes(item))
       .sort(function (a, b) {
         return a.toLowerCase().localeCompare(b.toLowerCase());
@@ -58,10 +66,11 @@ const App = () => {
     keys.unshift("badges");
     keys = [...new Set(keys)];
 
-    const keysWithDiff = keys.map((item) => {
+    const keysWithDiff = keys.map((key) => {
+      console.log(key, newNewProducts.every((x) => x[key] === productItem[key]));
       return {
-        key: item,
-        hasDiff: !products.every((x) => x[item] === products[0][item]),
+        key,
+        hasDiff: !newNewProducts.every((x) => x[key] === productItem[key]),
       };
     });
     setKeys(keysWithDiff);
@@ -71,14 +80,21 @@ const App = () => {
     if (checked) {
       const newShowProducts = [...showProducts, sku];
       setShowProducts(newShowProducts);
+      transformKeys(products, newShowProducts);
     } else {
-      setShowProducts([...showProducts].filter((item) => item !== sku));
+      const newShowProducts = [...showProducts, sku].filter(
+        (item) => item !== sku
+      );
+      setShowProducts(newShowProducts);
+      transformKeys(products, newShowProducts);
     }
   };
 
   const handlerRemoveSelectedItem = (sku) => {
+    const newProducts = [...products].filter((item) => item.sku !== sku);
     setShowProducts([...showProducts].filter((item) => item !== sku));
-    setProducts([...products].filter((item) => item.sku !== sku));
+    setProducts(newProducts);
+    transformKeys(newProducts);
   };
 
   return (
