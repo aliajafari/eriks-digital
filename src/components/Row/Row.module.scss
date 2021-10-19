@@ -1,0 +1,22 @@
+@import '../../styles/partials/variables';
+
+.rowFeature {
+    border-bottom: 1px solid darken($grey-color, 10%);
+    &:last-child {
+        border: none;
+    }
+    &.hasDiff {
+        background-color: darken($grey-color,10%);
+    }
+    .featureCell {
+        &:last-child {
+            border-right: none;
+        }
+    }
+}
+
+.title {
+    font-weight: bold;
+    border-right: 2px solid darken($grey-color,10%);;
+    padding: 5px;
+}

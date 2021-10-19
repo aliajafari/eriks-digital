@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { getProducts } from "../../requests";
 
 import "../../styles/styles.scss";
 import CompareItemHeader from "../CompareItemHeader";
+import Row from "../Row";
+import RowTable from "../RowTable";
+import SelectedItems from "../SelectedItems";
 import styles from "./App.module.scss";
 
 const App = () => {
@@ -37,6 +40,7 @@ const App = () => {
       .then((res) => {
         setProducts(res.data.products);
         setShowProducts(res.data.products.map((item) => item.sku));
+        // setShowProducts(["115E19", "11545A", "115E1A"]);
         transformKeys(res.data.products);
         setLoading(false);
       })
@@ -57,69 +61,75 @@ const App = () => {
     const keysWithDiff = keys.map((item) => {
       return {
         key: item,
-        hasDiff: products.every((x) => x[item] == products[0][item]),
+        hasDiff: !products.every((x) => x[item] === products[0][item]),
       };
     });
     setKeys(keysWithDiff);
   };
 
-  console.log(showProducts);
+  const handlerOnChangeSelectedItem = (checked, sku) => {
+    if (checked) {
+      const newShowProducts = [...showProducts, sku];
+      setShowProducts(newShowProducts);
+    } else {
+      setShowProducts([...showProducts].filter((item) => item !== sku));
+    }
+  };
+
+  const handlerRemoveSelectedItem = (sku) => {
+    setShowProducts([...showProducts].filter((item) => item !== sku));
+    setProducts([...products].filter((item) => item.sku !== sku));
+  };
 
   return (
-    <div className="container-fluid">
+    <Fragment>
       <div className={styles.compare__title}>
         <h1>{`${products.length} producten vergelijken`}</h1>
       </div>
-      <div className="row">
-        <div className={`col-xs-3 ${styles.compare__aside}`}>
-          <h2>Je selectie</h2>
-          <ul className={styles.selectedProductsList}>
-            {products.map((item) => {
-              return <li key={item.Artikelnummer}>{item.name}</li>;
-            })}
-          </ul>
-        </div>
-        <div className={`col-xs-9 ${styles.compare__content}`}>
+      <div className="wrapper">
+        <div className="container-fluid">
           <div className="row">
-            {products.map((item) => {
-              if (showProducts.includes(item.sku)) {
+            <div className={`col-xs-3 ${styles.compare__aside}`}>
+              <SelectedItems
+                onChangeSelectedItem={handlerOnChangeSelectedItem}
+                products={products}
+                showProducts={showProducts}
+              />
+            </div>
+            <div className={`col-xs-9 ${styles.compare__content}`}>
+              <div className="row">
+                {products.map((item) => {
+                  if (showProducts.includes(item.sku)) {
+                    return (
+                      <CompareItemHeader
+                        onClickRemoveItem={handlerRemoveSelectedItem}
+                        key={item.Artikelnummer}
+                        data={item}
+                      />
+                    );
+                  }
+                })}
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-xs-12">
+              {keys.map((keyItem) => {
                 return (
-                  <CompareItemHeader key={item.Artikelnummer} data={item} />
+                  <Row
+                    key={keyItem.key}
+                    keyItem={keyItem}
+                    products={products}
+                    showProducts={showProducts}
+                  />
                 );
-              }
-            })}
+              })}
+            </div>
           </div>
         </div>
       </div>
-      <div className={`${styles.compare__content}`}>
-        {keys.map((keyItem) => {
-          return (
-            <div key={keyItem.key} className="row">
-              <div className="col-xs-3">{keyItem.key}</div>
-              {products.map((productItem) => {
-                if (showProducts.includes(productItem.sku)) {
-                  if (keyItem.key === "badges") {
-                    return (
-                      <div key={productItem.sku} className="col-xs">
-                        {productItem[keyItem.key].split("|").map((badge) => {
-                          return <img key={badge} src={badge} />;
-                        })}
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div key={productItem.sku} className="col-xs">
-                        {productItem[keyItem.key]}
-                      </div>
-                    );
-                  }
-                }
-              })}
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    </Fragment>
   );
 };
 

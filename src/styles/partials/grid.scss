@@ -27,6 +27,7 @@
 }
 
 .container-fluid {
+    min-width: 1000px;
     padding-right: var(--outer-margin, 2rem);
     padding-left: var(--outer-margin, 2rem);
 }
@@ -243,6 +244,10 @@
         width: var(--container-sm, 46rem);
     }
 
+    .container-fluid {
+        width: 1000px;
+    }
+
     .col-sm,
     .col-sm-1,
     .col-sm-2,
@@ -438,6 +443,10 @@
         width: var(--container-md, 61rem);
     }
 
+    .container-fluid {
+        width: 1000px;
+    }
+
     .col-md,
     .col-md-1,
     .col-md-2,
@@ -631,6 +640,10 @@
 @media (--lg-viewport) {
     .container {
         width: var(--container-lg, 71rem);
+    }
+
+    .container-fluid {
+        width: 1000px;
     }
 
     .col-lg,

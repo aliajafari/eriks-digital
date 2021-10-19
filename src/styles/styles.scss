@@ -7,6 +7,7 @@ body {
     font-family: $default-font;
     background: white;
     line-height: 20px;
+    font-size: 14px;
 }
 
 h1,
@@ -17,6 +18,7 @@ h5 {
     color: $corporate-color;
 }
 
-.container-fluid {
-    width: 1240px
+.wrapper {
+    width: 100%;
+    overflow-x: scroll;
 }

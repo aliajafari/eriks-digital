@@ -1,11 +1,19 @@
 import React from "react";
 
-import styles from "./CompareItem.module.scss";
+import styles from "./CompareItemHeader.module.scss";
+import Trash from "../../styles/images/icons/trash-bin.png";
 
-function CompareItemHeader({ data }) {
+function CompareItemHeader({ data, onClickRemoveItem }) {
   return (
-    <div className='col-xs'>
+    <div className="col-xs">
       <div className={`${styles.compareItemHeader}`}>
+        <button
+          onClick={() => onClickRemoveItem(data.sku)}
+          className={styles.trashIcon}
+          type="button"
+        >
+          <img src={Trash} />
+        </button>
         <div>
           <img
             className={styles.productImage}

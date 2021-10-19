@@ -1,5 +1,9 @@
 @import '../../styles/partials/variables';
 
+.wrapper {
+    width: 100%;
+}
+
 .compare {
     &__title {
         border-bottom: 1px solid darken($grey-color, 10%);
@@ -16,19 +20,6 @@
     }
 
     &__content {
-        padding: 20px 0;
-    }
-}
-
-.selectedProductsList {
-    list-style-image: url('../../styles/images/icons/checked.png');
-    list-style-position: inside;
-    padding: 0;
-    margin: 0;
-    font-weight: 700;
-    font-size: 14px;
-
-    li {
-        margin-bottom: 10px;
+        padding: 0;
     }
 }
