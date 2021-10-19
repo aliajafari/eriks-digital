@@ -83,11 +83,13 @@ const App = () => {
 
   return (
     <Fragment>
-      <div className={styles.compare__title}>
-        <h1>{`${products.length} producten vergelijken`}</h1>
+      <div className="container-fluid">
+        <div className={`row ${styles.compare__title}`}>
+          <h1>{`${products.length} producten vergelijken`}</h1>
+        </div>
       </div>
       <div className="wrapper">
-        <div className="container-fluid">
+        <div className={`container-fluid ${styles.responsiveContainer}`}>
           <div className="row">
             <div className={`col-xs-3 ${styles.compare__aside}`}>
               <SelectedItems
