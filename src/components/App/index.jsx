@@ -56,8 +56,6 @@ const App = () => {
       showProducts.includes(item.sku)
     );
 
-    console.log("newNewProducts", newNewProducts);
-
     let keys = Object.keys(productItem)
       .filter((item) => !areNotFeature.includes(item))
       .sort(function (a, b) {
@@ -67,7 +65,6 @@ const App = () => {
     keys = [...new Set(keys)];
 
     const keysWithDiff = keys.map((key) => {
-      console.log(key, newNewProducts.every((x) => x[key] === productItem[key]));
       return {
         key,
         hasDiff: !newNewProducts.every((x) => x[key] === productItem[key]),
