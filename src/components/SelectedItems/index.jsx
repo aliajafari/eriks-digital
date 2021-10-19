@@ -2,10 +2,6 @@ import React, { Fragment } from "react";
 import styles from "./styles.module.scss";
 
 function SelectedItems({ products, showProducts, onChangeSelectedItem }) {
-//   const onChangeSelectedItem = (e, sku) => {
-//     onChangeSelectedItem(e.target.checked, sku);
-//   };
-
   return (
     <Fragment>
       <h2>Je selectie</h2>
@@ -17,7 +13,9 @@ function SelectedItems({ products, showProducts, onChangeSelectedItem }) {
                 value={item.sku}
                 type="checkbox"
                 checked={showProducts.includes(item.sku)}
-                onChange={(e) => onChangeSelectedItem(e.target.checked, item.sku)}
+                onChange={(e) =>
+                  onChangeSelectedItem(e.target.checked, item.sku)
+                }
               />
               <label value={item.sku}>{item.name}</label>
             </li>

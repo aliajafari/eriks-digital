@@ -49,6 +49,7 @@ const App = () => {
       });
   }, []);
 
+  // Find & Sort Feature Keys
   const transformKeys = (products, showProducts) => {
     const allProducts = products.filter((item) =>
       showProducts.includes(item.sku)
@@ -72,6 +73,7 @@ const App = () => {
     setKeys(keysWithDiff);
   };
 
+  // Handler for Checkboxes of Selected Item
   const handlerOnChangeSelectedItem = (checked, sku) => {
     if (checked) {
       const newShowProducts = [...showProducts, sku];
@@ -86,6 +88,7 @@ const App = () => {
     }
   };
 
+  // Handler for Remove Selected Item
   const handlerRemoveSelectedItem = (sku) => {
     const newProducts = [...products].filter((item) => item.sku !== sku);
     setShowProducts([...showProducts].filter((item) => item !== sku));

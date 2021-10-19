@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import styles from "./RowTable.module.scss";
 
-function RowTable({ children, keyItem, productItem }) {
+function RowTable({ keyItem, productItem }) {
   return (
     <Fragment>
       {keyItem.key === "badges" ? (
