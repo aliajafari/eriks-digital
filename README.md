@@ -1,7 +1,7 @@
 
 # Test Assignment for Eriks-Digitals
 
-It's a Test Assignment with React for Eriks-Digitals Company.
+It's a Test Assignment with React for Eriks-Digitals Company based on their documents. 
 ## Stacks
 
  - React

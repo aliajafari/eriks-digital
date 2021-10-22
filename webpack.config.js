@@ -1,10 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const esLintOptions = {
     failOnError: true,
-    fix:true,
+    fix: true,
 }
 
 module.exports = {
@@ -28,9 +29,24 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    "style-loader",
-                    "css-loader",
-                    "sass-loader",
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+
+                        }
+                    },
+
+                    {
+                        loader: "sass-loader",
+                        options: {
+                            sourceMap: true,
+                            sassOptions: {
+                                outputStyle: "compressed",
+                            },
+                        },
+                    },
                 ],
             },
             {
@@ -61,5 +77,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "src", "index.html"),
         }),
+        new MiniCssExtractPlugin({
+            filename: 'static/css/[name].[contenthash:8].css'
+        }),
+
     ],
 }
